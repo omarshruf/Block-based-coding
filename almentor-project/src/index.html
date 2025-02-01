@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Robomind - block based coding</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #000;
+            overflow: hidden;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #181818;
+            color: #ffffff;
+        }
+
+        button {
+            width: 52px;
+        }
+
+        #pageContainer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        #blocklyDiv {
+            flex: 1;
+            height: 100%;
+            min-width: 600px;
+            position: relative;
+            background: white;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode #blocklyDiv {
+            background: #333;
+            box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .action-button {
+            position: absolute;
+            right: 20px;
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out, opacity 0.3s;
+            font-size: 16px;
+            opacity: 0;
+        }
+
+        .action-button.visible {
+            opacity: 1;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+        }
+
+        #generateCode {
+            bottom: 120px;
+        }
+
+        #toggleMode {
+            bottom: 70px;
+        }
+
+        #exportData{
+            bottom: 170px;
+        }
+
+        #importData {
+            bottom: 218px;
+        }
+
+        #menuButton {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 52px;
+            height: 44px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+
+        #menuButton:hover {
+            background-color: #0056b3;
+        }
+
+        #generatedCode {
+            height: 85%;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 14px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #generatedCode.dark-mode {
+            background-color: #4d4848;
+        }
+
+        #outputPane {
+            width: 30%;
+            height: 100%;
+            padding: 15px;
+            background-color: #ffffff;
+            overflow: auto;
+            border-left: 3px solid #007BFF;
+            
+            box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #outputPane.dark-mode {
+            background-color: #222222;
+        }
+
+        h2 {
+            color: #007BFF;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="pageContainer">
+        <div id="blocklyDiv"></div>
+        <div id="outputPane">
+            <h2>Application Made By Omar Shrif</h2>
+            <pre id="generatedCode"><code></code></pre>
+        </div>
+    </div>
+    
+    <button id="importData" class="action-button" style="display: flex; justify-content: center;"><i class="fa-solid fa-file-import"></i></button>
+    <button id="exportData" class="action-button" style="display: flex; justify-content: center;"><i class="fa fa-file-export"></i></button>
+    <button id="generateCode" class="action-button" style="display: flex; justify-content: center;"><i class="fa-solid fa-code"></i></button>
+    <button id="toggleMode" class="action-button" style="display: flex; justify-content: center;"><i class="fa fa-moon" id="DayState"></i></button>
+    <button id="menuButton" style="width: 52px; height: 44px;" style="display: flex; justify-content: center;"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+
+    <script>
+        document.getElementById('toggleMode').addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            let DayState = document.getElementById("DayState");
+
+            const blocklyBackground = document.querySelector('.blocklyMainBackground');
+            const blocklyToolbox = document.querySelector('.blocklyToolboxDiv');
+            const outputPane = document.getElementById('outputPane');
+            const generatedCode = document.getElementById('generatedCode');
+
+            outputPane.classList.toggle('dark-mode');
+            generatedCode.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                if (blocklyBackground) blocklyBackground.style.fill = "#222"; 
+                if (blocklyToolbox) blocklyToolbox.style.backgroundColor = "#4d4848";
+                
+                DayState.classList.remove("fa-moon");
+                DayState.classList.add("fa-sun");
+            } else {
+                if (blocklyBackground) blocklyBackground.style.fill = "#fff"; 
+                if (blocklyToolbox) blocklyToolbox.style.backgroundColor = "#ddd";
+                
+                DayState.classList.remove("fa-sun");
+                DayState.classList.add("fa-moon");
+            }
+        });
+
+
+        document.getElementById('menuButton').addEventListener('click', function() {
+            document.getElementById('generateCode').classList.toggle('visible');
+            document.getElementById('importData').classList.toggle('visible');
+            document.getElementById('exportData').classList.toggle('visible');
+            document.getElementById('toggleMode').classList.toggle('visible');
+        });
+
+        alert("if the block container is not shown make sure to run the node js server");
+    </script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Robomind - Block-Based Coding</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, #f9f5ee, #e8dfd0);
+            color: #444;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background-color: #222;
+            color: #f9f9f9;
+        }
+
+        .nav {
+            background-color: #ECE3D5;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav ul {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav ul li {
+            margin-right: 20px;
+            overflow: visible;
+        }
+
+        .nav ul li a {
+            color: #444;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav ul li a:hover{
+            background: linear-gradient(145deg, wheat, #f8e8c9);
+            transform: scale(1.1);
+        }
+
+        .burger-menu nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .burger-menu nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .burger-menu nav ul li {
+            width: 100%;
+            text-align: center;
+        }
+
+        .burger-menu nav ul li a, 
+        .burger-menu nav ul li button {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .burger-menu nav ul li a:hover, 
+        .burger-menu nav ul li button:hover {
+            transform: scale(1.1);
+            color: #ffcc5c;
+        }
+
+        .toggleModeTwo i{
+            color: white;
+            font-size: 36px;
+        }
+
+        .toggleModeTwo i:hover{
+            color: #ffcc5c
+        }
+
+        .logo {
+            color: #333;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #444;
+        }
+
+        .toggleMode {
+            width: 45px;
+            height: 45px;
+            font-size: 22px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00000000;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            border-radius: 50%;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .toggleMode:hover {
+            background: linear-gradient(145deg, wheat, #f8e8c9);
+            transform: scale(1.2);
+        }
+
+        .hero {
+            width: 100%;
+            height: 92vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            background-color: #ECE3D5;
+            width: 85%;
+            max-width: 1100px;
+            height: 500px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .text-content {
+            max-width: 50%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .text-content h1 {
+            color: #333;
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .text-content p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .cta-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #ffcc5c;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            width: 100%;
+        }
+
+        .cta-button:hover {
+            background-color: #ffb84d;
+            transform: scale(1.05);
+        }
+
+        .main img {
+            width: 480px;
+            height: auto;
+            object-fit: cover;
+            filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+        }
+
+        #DayState{
+            color: #444;
+        }
+
+        .dark-mode{
+            color: #f9f9f9;
+        }
+
+        nav.dark-mode {
+            background-color: #5B5853;
+        }
+            
+        .text-content h1,
+        .text-content p {
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .text-content h1,
+        body.dark-mode .text-content p,
+        body.dark-mode .logo a,
+        body.dark-mode nav ul li a,
+        body.dark-mode .cta-button,
+        body.dark-mode #DayState,
+        body.dark-mode .hamburger-button
+        {
+            color: #f9f9f9;
+        }
+
+        .menu-list {
+            display: block;
+        }
+
+        .hamburger-button {
+            display: none;
+            background: none;
+            outline: none;
+            border: none;
+            font-size: 27px;
+            width: 46px;
+            height: 46px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hamburger-button:hover {
+            background: linear-gradient(145deg, wheat, #f8e8c9);
+            transform: scale(1.1);
+        }
+
+        .burger-menu {
+            position: fixed;
+            top: 0px;
+            width: 100%;
+            height: 100vh;
+            background: #3b3b3b;
+            color: white;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .burger-menu.active {
+            display: flex;
+        }
+
+        .burger-menu-close-button {
+            position: absolute;
+            top: 25px;
+            right:25px;
+            border: none;
+            outline: none;
+            background: none;
+            color: white;
+            width: 33px;
+            height: 33px;
+            font-size: 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .burger-menu-close-button:hover {
+            color: black;
+            background: linear-gradient(145deg, wheat, #f8e8c9);
+            transform: scale(1.1);
+        }
+
+        @media (max-width:1025px) {
+            .main {
+                flex-direction: column;
+                justify-content: center;
+                padding: 20px;
+                height: 780px;
+            }
+
+            .text-content {
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .main img {
+                width: 380px;
+                height: auto;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 740px){
+            .menu-list {
+                display: none;
+            }
+
+            .hamburger-button {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo"><a href="#">RoboBlock</a></div>
+        <ul>
+            <li class="menu-list"><a href="#">Home</a></li>
+            <li class="menu-list"><a href="almentor-project/src/index.html">Create</a></li>
+            <li class="menu-list"><button id="toggleMode" class="toggleMode"><i class="fa fa-moon" id="DayState"></i></button></li>
+            <button class="hamburger-button">☰</button>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <div class="main">
+            <img src="images/two-boys-engaged-in-learning-together-with-a-laptop-on-transparent-background-png.png" alt="learning child">
+            <div class="text-content">
+                <h1>Coding For Kids and Teens Made Easy</h1>
+                <p>Fun, interactive coding with blocks designed to make learning easy and exciting!</p>
+                <a href="almentor-project/src/index.html" class="cta-button">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="burger-menu">
+        <h1>MENU</h1>
+        <button class="burger-menu-close-button">X</button>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="almentor-project/src/index.html">Create</a></li>
+                <li><button id="toggleMode" class="toggleModeTwo"><i class="fa fa-moon"></i></button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        document.querySelectorAll('#toggleMode').forEach(button => {
+            button.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                let DayState = document.getElementById("DayState");
+                let icons = document.querySelectorAll('#DayState, .toggleModeTwo i');
+                let hero = document.querySelector('.hero');
+                let main = document.querySelector('.main');
+                let nav = document.querySelector('.nav');
+
+                if (document.body.classList.contains('dark-mode')) {
+                    main.style.backgroundColor = "#5B5853";
+                    nav.style.backgroundColor = "#5B5853";
+                    hero.style.backgroundColor = "#5e5e5e";
+                    
+                    icons.forEach(icon => icon.classList.replace("fa-moon", "fa-sun"));
+                } else {
+                    main.style.backgroundColor = "#ECE3D5";
+                    nav.style.backgroundColor = "#ECE3D5";
+                    hero.style.backgroundColor = "white";
+
+                    icons.forEach(icon => icon.classList.replace("fa-sun", "fa-moon"));
+                }
+
+                DayState.style.backgroundColor = "#00000000";
+            });
+        });
+
+        document.querySelector(".hamburger-button").addEventListener("click", function() {
+            document.querySelector(".burger-menu").style.display = "flex";
+        });
+
+        document.querySelector(".burger-menu-close-button").addEventListener("click", function() {
+            document.querySelector(".burger-menu").style.display = "none";
+        });
+    </script>
+</body>
+</html>
