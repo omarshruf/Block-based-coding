@@ -1,6 +1,6 @@
 # 🚀 Robomind Block-Based Coding Project
 
-## ❓ How To Run THe Website
+## ❓ How To Run The Website
 
 | The Steps To Run THe Project         |
 |--------------------------------------|
