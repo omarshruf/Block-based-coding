@@ -9,6 +9,8 @@
 | 3 - open simple_mainmenu.html        |
 | 4 - enjoy                            |
 
+---
+
 ## 🌟 Project Features
 
 | Feature                              |
