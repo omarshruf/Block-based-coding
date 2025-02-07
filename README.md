@@ -1,5 +1,14 @@
 # 🚀 Robomind Block-Based Coding Project
 
+## ❓ How To Run THe Website
+
+| The Steps To Run THe Project         |
+|--------------------------------------|
+| 1 - make sure you in almentor-project file in cmd     |
+| 2 - type in cmd ( npm start )        |
+| 3 - open simple_mainmenu.html        |
+| 4 - enjoy                            |
+
 ## 🌟 Project Features
 
 | Feature                              |
